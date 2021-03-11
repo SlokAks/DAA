@@ -38,7 +38,7 @@
 
 \urlstyle{same}
 
-\title{\textbf{Given an array representing n positions along a straight line. Find k (where \( k <= n\)) elements from the array such that the minimum distance between any two (consecutive points among the k points) is maximized.}}
+\title{\textbf{Finding k elements from a given array of positions such that the minimum distance between any two consecutive points among them is maximized.}}
 \author{Naveen Kumar - IIT2019066,\\* Slok Aks - IIT2019067, \\* Simhachalam Anirudh - IIT2019068 }
 \date{Date: 11-03-2021}
 
