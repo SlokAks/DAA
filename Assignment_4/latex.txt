@@ -1,0 +1,200 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\graphicspath{ {./images/} }
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily}, 
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=black,      
+    urlcolor=black,
+}
+
+\urlstyle{same}
+
+\title{\textbf{Given an array representing n positions along a straight line. Find k (where \( k <= n\)) elements from the array such that the minimum distance between any two (consecutive points among the k points) is maximized.}}
+\author{Naveen Kumar - IIT2019066,\\* Slok Aks - IIT2019067, \\* Simhachalam Anirudh - IIT2019068 }
+\date{Date: 11-03-2021}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+In this paper, we have devised an algorithm to find k elements from the array such that the minimum distance between any two(consecutive points among the k points) is maximized, in a given array representing n positions along a straight line.
+\end{abstract}
+
+\begin{multicols}{2}
+
+\section{Problem}
+Given an array representing n positions along a straight line. Find k (where \(k <= n\)) elements from the array such that the minimum distance between any two (consecutive points among the k points) is maximized.
+
+\section{Keywords}
+positions, straight, points, consecutive, array.
+
+\section{Introduction}
+
+\textbf{Array:} An array is a collection of items stored at contiguous memory locations. The idea is to store multiple items of the same type together. This makes it easier to calculate the position of each element by simply adding an offset to a base value. 
+\newline
+\newline\textbf{Straight-line:} A straight line is the set of all points between and extending beyond two points.
+\newline
+\newline\textbf{Sorting:} A Sorting Algorithm is used to rearrange a given array or list elements according to a comparison operator on the elements. In this assignment, we sort the array in ascending order.
+
+\section{Algorithm Design}
+ To find the k elements (where k<=n), from the array such that the minimum distance between any two (consecutive points among the k points) is maximized, we implement the following steps in our algorithm :
+ 
+\begin{enumerate}
+\item Sort the input array.
+\item Set lower = 1, which is the lowest possible distance, and set upper = arr[n-1] - arr[0], which is the maximum possible distance.
+\item Now, we apply binary search over lower to upper.
+\begin{itemize}
+\item Check isFeasible() for the mid until lower \(<\) upper, i.e; if it is possible to select ‘k’ elements using the mid as minimum distance.
+\item If feasible, then check for higher distance next, i.e; more than mid and upto upper.
+\item Else, check for lower distance next, i.e; less than mid and from lower.
+\end{itemize}
+\item So, we get the required distance.
+\item Now, we apply a modified version of isFeasible(), named printElem() to get the final ‘k’ selected elements with the maximum minimum distance, which was required.
+\end{enumerate}
+
+\section{Algorithm Analysis}
+(I) Function to check for feasibility of a chosen distance.
+\begin{lstlisting}
+bool isFeasible(int mid, int arr[], int n, int k)
+
+	int current = arr[0];
+	int element_count = 1;
+
+	for (int i = 1; i < n; i++)
+		if (arr[i] - current >= mid) 
+			current = arr[i];
+			element_count++;
+
+			if (element_count == k)
+			    return true;
+	
+	return false;
+                 
+\end{lstlisting}
+(II) Function to find maximised minimum distance.
+\begin{lstlisting}
+
+int maximised_min_dist(int arr[], int n, int k)
+
+	sort(arr, arr + n);
+	int result = -1;
+
+	int lower = 1, upper = arr[n - 1] - arr[0];
+
+	while (lower < upper) 
+		int mid = (lower + upper) / 2;
+
+		if (isFeasible(mid, arr, n, k))
+			result = max(result, mid);
+			lower = mid + 1;
+		else
+			upper = mid;
+
+	return result;
+                 
+\end{lstlisting}
+
+(III) Function to print the selected 'k' elements for which we get maximised minimum distance. 
+\begin{lstlisting}
+void printElem(int arr[], int maxMinDiff, int k, int n) 
+    
+    int prevPlaced = arr[0];
+    cout<<prevPlaced<<" ";
+    
+    int numPlaced = 1;
+    
+    for(int i = 1; i < n; i++) 
+        if(arr[i] - prevPlaced >= maxMinDiff) 
+            prevPlaced = arr[i];
+            cout<<prevPlaced<<" ";
+            
+            numPlaced++;
+            
+            if(numPlaced == k) 
+                break;
+	return;
+
+\end{lstlisting}
+
+\subsection{Time Complexity Analysis}
+As we can see from the above algorithm, we need to go through the max heap, k-1 times, so that finally our priority queue will have the kth largest element.\newline\newline The initial size of the priority queue is one, and it increases by at most one at each of the k – 1 steps. Therefore, there are maximum k elements in the priority queue and the time complexity of the pop and insert operations is $O(log k)$. \newline\newline So the total Time Complexity of this Algorithm becomes of order of $k*log(k)$.\newline\newline The Best case is when, k=1 and hence TC for best case is $\Omega(1)$.\newline\newline The Worst case will depend upon value of N. Hence, Worst case TC will be $O(k*log(k))$.
+
+\subsection{Space Complexity:}
+In this algorithm we have used priority queue for storing k max elements, hence Space Complexity (Extra Space used) is O(k).
+ 
+
+\section{Experimental Analysis}
+In the following table some cases are plotted,\newline
+\begin{center}
+ \begin{tabular}{||c | c||} 
+ \hline
+ k & Time Taken \\ [0.5ex] 
+ \hline\hline
+ 2 & 0.0003 \\ 
+ \hline
+ 4 & 0.0005 \\
+ \hline
+ 8 & 0.0009 \\
+ \hline
+ 16 & 0.0011 \\
+ \hline
+ 20 & 0.0010 \\
+ \hline
+ 24 & 0.0019 \\
+ \hline
+ 30 & 0.02 \\
+ \hline
+ 40 & 0.034 \\
+ \hline
+ 50 & 0.04 \\ [1ex] 
+ \hline
+\end{tabular}
+\end{center}
+Here k represents the kth greatest element, and on y-axis the time taken is in seconds
+
+\begin{center}
+    \includegraphics[scale=0.4]{ass3exp.png}
+\end{center}
+The above graph shows the variance of Time with respect to size of heap taken(N), and follows our theoretically calculated TC of $O(k*log(k))$.
+
+
+\section{Conclusion}
+In this paper, we have discussed an algorithm that will print the k elements in the array such that the minimum distance between two consecutive elements (among the k points) is maximized. The time complexity of the algorithm is $O(n*log n + k*log d)$ and space complexity is $O(n)$, where d = maximum distance between any two points. This algorithm can be considered as the optimal solution to this problem.
+
+\section{References}
+[1] GeeksforGeeks, 'Introduction to Arrays', GeeksforGeeks, 2018. [Online]. [Accessed: 5-Mar-2021]\newline
+\newline
+[2] GeeksforGeeks, 'Place k elements such that minimum distance is maximized)', GeeksforGeeks, 2018. [Online]. [Accessed: 5-Feb-2021]\newline
+\newline
+[3] GeeksforGeeks, 'Sorting Algorithm', GeeksforGeeks, 2018. [Online]. [Accessed: 5-Mar-2021]\newline
+
+\end{multicols}
+\end{document}
