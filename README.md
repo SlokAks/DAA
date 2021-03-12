@@ -28,7 +28,7 @@ Firstly Clone the project into the local machine using command:
 Go to the to the project directory:
 ```
 cd DAA/Assignemt
-
+```
 Run the code
 ```
 g++ FinalCode -o FinalCode.c
