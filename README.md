@@ -3,7 +3,7 @@
 **Team Members**
 |   Enrollment No.  |   Name   | GithubId |
 |   --------------  |   ----   | -------- |
-|    IIT2019066  |   xyz | merazlab |
+|    IIT2019066  | Naveen Kumar | navmanak |
 |    IIT2019067  |   Slok Aks | SlokAks | 
 |    IIT2019068  |   Simhachalam Anirudh | anirudh2019  |
 
