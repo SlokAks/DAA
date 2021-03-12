@@ -82,36 +82,37 @@ int main()
 	cin>>T;
 	cout<<endl<<endl;
 
-	while(T--){
+	while(T--)
+	{
 
-	srand(time(0));
-	clock_t start,end;
-	start = clock();
+		srand(time(0));
+		clock_t start,end;
+		start = clock();
 
-	int N,K;
-	cout<<"N: "; cin>>N;
-	cout<<"K: "; cin>>K;
+		int N,K;
+		cout<<"N: "; cin>>N;
+		cout<<"K: "; cin>>K;
 
-	int arr[N] ;
+		int arr[N] ;
 
-	for(int i=0;i<N;i++)
-	arr[i] = randint(-99999,99999);
+		for(int i=0;i<N;i++)
+			arr[i] = randint(-99999,99999);
 
-    cout<<"arr: ";
-	for(int i = 0;i<N;i++)
-    cout<<arr[i]<<' ';
-	cout<<endl;
+    		cout<<"arr: ";
+		for(int i = 0;i<N;i++)
+    			cout<<arr[i]<<' ';
+		cout<<endl;
 	
 
-	int ans = maximised_min_dist(arr, N, K);
+		int ans = maximised_min_dist(arr, N, K);
     
-	end = clock();
+		end = clock();
 
-	cout<<"The maximised minimum distance is : "<<ans<<endl;
-	cout<<"The K(= "<<K<<") - elements in which minimum distance between any two consecutive points is maximised are : " <<endl;
-	printElem(arr, ans, K, N);
-	cout<<endl;
-	cout<<"Time : "<<(double(end-start)/double(CLOCKS_PER_SEC))*1000000<<endl<<endl;
+		cout<<"The maximised minimum distance is : "<<ans<<endl;
+		cout<<"The K(= "<<K<<") - elements in which minimum distance between any two consecutive points is maximised are : " <<endl;
+		printElem(arr, ans, K, N);
+		cout<<endl;
+		cout<<"Time : "<<(double(end-start)/double(CLOCKS_PER_SEC))*1000000<<endl<<endl;
 
 
 	}
