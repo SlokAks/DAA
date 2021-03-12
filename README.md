@@ -5,7 +5,7 @@
 |   --------------  |   ----   | -------- |
 |    IIT2019066  |   xyz | merazlab |
 |    IIT2019067  |   Slok Aks | SlokAks | 
-|    IIT2019068  |   pqr | ram  |
+|    IIT2019068  |   Simhachalam Anirudh | anirudh2019  |
 
 **Group No-**"22"
 
