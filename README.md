@@ -87,7 +87,19 @@ maximised minimum distance is : 15569
 ---
 
 ### Theory
-A quick and simplified answer is that Lorem Ipsum refers to text that the DTP (Desktop Publishing) industry use as replacement text when the real text is not available. ... Lorem Ipsum is dummy text which has no meaning however looks very similar to real text.
+To find the k elements (where k<=n), from the array such that the minimum distance between any two (consecutive points among the k points) is maximized, we implement the following steps in our algorithm :
+1.  Sort the input array.
+
+2.  Set lower = 1, which is the lowest possible distance, and set upper = arr[n-1] - arr[0], which is the maximum possible distance.
+3.  Now, we apply binary search over lower to upper.
+
+•Check  isFeasible()  for  the  mid  until lower < upper, i.e; if it is possible to select  ‘k’  elements  using  the  mid  as minimum distance.
+If  feasible,  then  check  for  higher  distance  next,  i.e;  more  than  mid  and upto upper.
+Else, check for lower distance next, i.e; less than mid and from lower
+
+4.  So, we get the required distance.
+
+5.  Now, we apply a modified version of isFeasible(), named printElem() to get the final ‘k’ selected elements with the maximum minimum distance, which was required.
 
 ---
 
@@ -95,14 +107,24 @@ A quick and simplified answer is that Lorem Ipsum refers to text that the DTP (D
 
 **Time Complexity**
 
-A quick and simplified answer is that Lorem Ipsum refers to text that the DTP (Desktop Publishing) industry use as replacement text when the real text is not available. Lorem Ipsum is dummy text which has no meaning however looks very similar to real text.
+In the above algorithm, the time complexity of isFeasible() function is O(N) as in the worst case, the for loop will have N - 1 iterations. In the function maximised_min_dist(), the while loop iterates until “lower” becomes equal to “upper”.
+
+When lower becomes equal to upper, then D/2^m = 1, where m is number of iterations and D is maximum possible distance between any two points among N points
+                                                            => D = 2^m
+                                                            => m = logD
+But in each iteration of that while loop, isFeasible() function is called once, and also there is sort function before while loop in maximised_min_dist() whose time complexity is O(NlogN). 
+Therefore Overall time complexity is O(N*logN + N*logD)
+                                                            => **O(N*log(N*D)) **
 
 **Space Complexity**
 
-A quick and simplified answer is that Lorem Ipsum refers to text that the DTP (Desktop Publishing) industry use as replacement text when the real text is not available. ... Lorem Ipsum is dummy text which has no meaning however looks very similar to real text.
+In the above algorithm, only one array of size N is used to store input array and some integer variables are used. So, the Overall space complexity is **O(N).**
 
 ---
 
 ### References
 
-A quick and simplified answer is that Lorem Ipsum refers to text that the DTP (Desktop Publishing) industry use as replacement text when the real text is not available. ... Lorem Ipsum is dummy text which has no meaning however looks very similar to real tex
+[1] GeeksforGeeks, 'Introduction to Arrays', GeeksforGeeks, 2018. [Online]. [Accessed: 5-Mar-2021] 
+[2] GeeksforGeeks, 'Place k elements such that minimum distance is maximized)', GeeksforGeeks, 2018. [Online]. [Accessed: 5-Feb-2021]
+[3] GeeksforGeeks, 'Sorting Algorithm', GeeksforGeeks, 2018. [Online]. [Accessed: 5-Mar-2021]
+
